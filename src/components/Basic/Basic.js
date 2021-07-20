@@ -13,7 +13,7 @@ function Basic(props) {
       <ul className="about-model__list">
         {Object.keys(props.basic).map((el) => {
           if(typeof props.basic[el] !== 'object')
-            return <li className="about-model__list-item" onDoubleClick={handleChange}>{`${el} - ${props.basic[el]}`}</li>
+            return <li className="about-model__list-item about-model__list-item_basic" onDoubleClick={handleChange}>{`${el} - ${props.basic[el]}`}</li>
         })}
       </ul>
     </div>

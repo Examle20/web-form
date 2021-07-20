@@ -43,3 +43,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.about-model__list-item_basic:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
