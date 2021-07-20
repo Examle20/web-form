@@ -1,0 +1,26 @@
+.about-model {
+  width: 450px;
+  margin-left: 30px;
+}
+
+.about-model__pages {
+  margin-left: 150px;
+}
+
+.about-model__list {
+  list-style: none;
+  padding: 0;
+}
+
+.about-model__tabs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-model__tab {
+  text-decoration: none;
+}
+
+.about-model__list-item {
+
+}

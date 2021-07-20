@@ -1,0 +1,22 @@
+.tree {
+
+}
+
+.tree__list {
+  list-style: none;
+  padding: 0 0 0 10px;
+}
+
+.tree__list-auto {
+  margin: 20px 0 0 0;
+}
+
+.tree__list-model {
+  margin-top: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.tree__list-model:hover {
+  transform: scale(1.5);
+}
