@@ -1,32 +1,32 @@
 import './AboutModel.css';
 import Basic from "../Basic/Basic";
 import Species from "../Species/Species";
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, useLocation } from 'react-router-dom';
 function AboutModel(props) {
-
+  const location = useLocation();
+  const model = location.pathname.toString().split('/')[1]
   return (
-    <BrowserRouter>
     <div className="about-model">
+      {model &&
       <nav className="about-model__tabs">
-        <NavLink to="/basic" className="about-model__tab">Основные характеристики</NavLink>
-        <NavLink to="/species" className="about-model__tab">Разновидности двигателей</NavLink>
+        <NavLink exact to={`/${model}/basic`} activeClassName="about-model__tab_active" className="about-model__tab">Основные характеристики</NavLink>
+        <NavLink exact to={`/${model}/species`} activeClassName="about-model__tab_active" className="about-model__tab">Разновидности двигателей</NavLink>
       </nav>
-      <h2>{props.auto}</h2>
+      }
       <div className="about-model__pages">
-        <Route path="/basic">
+        <Route path={`/${model}/basic`}>
           <Basic
             basic={props.aboutModel}
             onChangeValue={props.onChangeValue}
           />
         </Route>
-        <Route path="/species">
+        <Route path={`/${model}/species`}>
           <Species
             species={props.aboutModel}
           />
         </Route>
       </div>
     </div>
-    </BrowserRouter>
   );
 }
 

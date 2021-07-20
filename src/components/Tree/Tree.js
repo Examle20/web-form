@@ -1,4 +1,7 @@
 import './Tree.css';
+import {NavLink} from "react-router-dom";
+import {data} from "../../utils/constans";
+
 
 function Tree(props) {
 
@@ -11,11 +14,11 @@ function Tree(props) {
   const createTree = (obj) => {
     if(!Object.keys(obj)) return;
     return Object.keys(obj).map((el) => {
-      return <li className="tree__list-auto">{el} {Object.keys(obj[el]).map(item => <ul onClick={handleClickModel} className="tree__list-model">{item}</ul>)}</li>
+      return <li className="tree__list-auto">{el} {Object.keys(obj[el]).map(item => <NavLink activeClassName="tree__list-auto_active" to={`/${item}`} onClick={handleClickModel} className="tree__list-model">{item}</NavLink>)}</li>
     })
   }
 
-  const tree = createTree(JSON.parse(localStorage.getItem('data')))
+  const tree = createTree(JSON.parse(localStorage.getItem('data')) || data)
 
   return (
     <div className="tree">

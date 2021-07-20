@@ -1,10 +1,11 @@
 .about-model {
   width: 450px;
-  margin-left: 30px;
+  margin-left: 10px;
+  background-color: #D3D3D3;
 }
 
 .about-model__pages {
-  margin-left: 150px;
+  margin-left: 20px;
 }
 
 .about-model__list {
@@ -15,12 +16,30 @@
 .about-model__tabs {
   display: flex;
   justify-content: space-between;
+  width: 430px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .about-model__tab {
+  color: black;
   text-decoration: none;
 }
 
-.about-model__list-item {
+.about-model__tab_active {
+  border-bottom: 1px solid black;
+}
 
+.about-model__title {
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.about-model__list-item {
+  width: max-content;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
