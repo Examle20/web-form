@@ -4,8 +4,10 @@ function Basic(props) {
 
   const handleChange = (e) => {
     const value = prompt('Введите новое значение')
-    props.onChangeValue(e.target.textContent, value);
-    e.target.textContent = e.target.textContent.split(' ')[0] + ' - '+  value;
+    if(value) {
+      props.onChangeValue(e.target.textContent, value);
+      e.target.textContent = e.target.textContent.split(' ')[0] + ' - ' + value;
+    }
   }
 
   return (
