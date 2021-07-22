@@ -42,6 +42,7 @@ function App(props) {
       setData(JSON.parse(readerEvent.target.result.toString()))
     }
     setIsButtonSave(true)
+    props.history.push('/')
   }
 
   const handleSaveValues = () => {
