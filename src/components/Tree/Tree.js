@@ -17,10 +17,14 @@ function Tree(props) {
     })
   }
 
+  const handleOutPutTree = () => {
+    return (Object.keys(props.data).length ? createTree(props.data): 'Нет данных для отображения')
+  }
+
   return (
     <div className="tree">
       <ul className="tree__list">
-        {Object.keys(props.data).length && createTree(props.data)}
+        {handleOutPutTree()}
       </ul>
     </div>
   );

@@ -1,7 +1,7 @@
 import './Species.css';
 
 function Species(props) {
-  console.log(props.species.models)
+
   return (
     <div className="species">
       <ul className="about-model__list">

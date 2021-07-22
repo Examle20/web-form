@@ -1,13 +1,20 @@
 import './App.css';
 import Main from "../Main/Main";
 import React from "react";
-import {data} from "../../utils/constans";
 import {withRouter} from 'react-router-dom';
 function App(props) {
 
   const [aboutModel, setAboutModel] = React.useState({basic: {}, species: {}})
   const [auto, setAuto] = React.useState('')
   const [data, setData] = React.useState({})
+
+  const [isSave, setIsSave] = React.useState(false)
+  const [saveHref, setSaveHref] = React.useState('')
+  const [saveDownload, setSaveDownload] = React.useState('')
+
+  const handleHideSaveLink = () => {
+    setIsSave(false);
+  }
 
   const getModel = (auto, model) => {
     setAuto(auto + ' ' + model)
@@ -19,11 +26,10 @@ function App(props) {
   }
 
   const handleChangeValue = (variableValue, value) => {
-    const object = JSON.parse(localStorage.getItem('data'))
     const producer = auto.split(' ')[0]
     const model = auto.split(' ').slice(1).join(' ')
     const property = returnAutoProperty(variableValue);
-    object[producer][model][property] = Number(value);
+    data[producer][model][property] = Number(value);
   }
 
   const handleSelectFile = (e) => {
@@ -34,23 +40,36 @@ function App(props) {
     }
   }
 
+  const handleSaveValues = () => {
+    const value = prompt('Введите название файла')
+    const file = new Blob(
+      [JSON.stringify(data)],
+      { type: 'application/json'})
+    setSaveHref(URL.createObjectURL(file))
+    setSaveDownload(value)
+    setIsSave(true)
+  }
+
   React.useEffect(()=> {
     props.history.push('/')
-    if (!localStorage.getItem('data')){
-      localStorage.setItem('data', JSON.stringify(data));
-    }
   },[])
 
   return (
-    <div className="App">
-      <input type="file" onChange={handleSelectFile}/>
-      <Main
-        data={data}
-        onGetModel={getModel}
-        aboutModel={aboutModel}
-        onChangeValue={handleChangeValue}
-        auto={auto}
-      />
+    <div className="app">
+      <div className="app__container">
+        <div className="app__container-wrapper">
+          <input type="file" onChange={handleSelectFile}/>
+          <button type="button" onClick={handleSaveValues}>Сохранить изменения</button>
+          {isSave && <a href={saveHref} download={saveDownload} onClick={handleHideSaveLink} className="app__link-save">Скачать файл</a>}
+        </div>
+        <Main
+          data={data}
+          onGetModel={getModel}
+          aboutModel={aboutModel}
+          onChangeValue={handleChangeValue}
+          auto={auto}
+        />
+      </div>
     </div>
   );
 }

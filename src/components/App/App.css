@@ -1,6 +1,19 @@
-.App {
+.app {
   display: flex;
   width: 700px;
   height: 500px;
   margin: 100px auto 0 auto;
+}
+.app__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.app__container-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.app__link-save {
+  text-decoration: none;
 }
