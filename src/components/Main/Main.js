@@ -8,6 +8,7 @@ function Main(props) {
     <div className="main">
       <Route path="/">
         <Tree
+          data={props.data}
           onGetModel={props.onGetModel}
         />
         <AboutModel

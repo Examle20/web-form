@@ -1,6 +1,5 @@
 import './Tree.css';
 import {NavLink} from "react-router-dom";
-import {data} from "../../utils/constans";
 
 
 function Tree(props) {
@@ -18,17 +17,14 @@ function Tree(props) {
     })
   }
 
-  const tree = createTree(JSON.parse(localStorage.getItem('data')) || data)
-
   return (
     <div className="tree">
       <ul className="tree__list">
-        {tree}
+        {Object.keys(props.data).length && createTree(props.data)}
       </ul>
     </div>
   );
 }
-
 
 export default Tree;
 
