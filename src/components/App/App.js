@@ -8,12 +8,14 @@ function App(props) {
   const [auto, setAuto] = React.useState('')
   const [data, setData] = React.useState({})
 
+  const [isButtonSave, setIsButtonSave] = React.useState(false)
   const [isSave, setIsSave] = React.useState(false)
   const [saveHref, setSaveHref] = React.useState('')
   const [saveDownload, setSaveDownload] = React.useState('')
 
   const handleHideSaveLink = () => {
     setIsSave(false);
+    setIsButtonSave(true)
   }
 
   const getModel = (auto, model) => {
@@ -34,20 +36,25 @@ function App(props) {
 
   const handleSelectFile = (e) => {
     const reader = new FileReader();
+    console.log(e.target.files[0].type)
     reader.readAsText(e.target.files[0]);
     reader.onload = (readerEvent) => {
       setData(JSON.parse(readerEvent.target.result.toString()))
     }
+    setIsButtonSave(true)
   }
 
   const handleSaveValues = () => {
+    setIsButtonSave(false)
     const value = prompt('Введите название файла')
-    const file = new Blob(
-      [JSON.stringify(data)],
-      { type: 'application/json'})
-    setSaveHref(URL.createObjectURL(file))
-    setSaveDownload(value)
-    setIsSave(true)
+    if(value) {
+      const file = new Blob(
+        [JSON.stringify(data)],
+        {type: 'application/json'})
+      setSaveHref(URL.createObjectURL(file))
+      setSaveDownload(value)
+      setIsSave(true)
+    }
   }
 
   React.useEffect(()=> {
@@ -58,8 +65,8 @@ function App(props) {
     <div className="app">
       <div className="app__container">
         <div className="app__container-wrapper">
-          <input type="file" onChange={handleSelectFile}/>
-          <button type="button" onClick={handleSaveValues}>Сохранить изменения</button>
+          <input type="file" onChange={handleSelectFile} accept="application/json"/>
+          {isButtonSave && <button type="button" onClick={handleSaveValues}>Сохранить</button>}
           {isSave && <a href={saveHref} download={saveDownload} onClick={handleHideSaveLink} className="app__link-save">Скачать файл</a>}
         </div>
         <Main
